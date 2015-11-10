@@ -12,39 +12,38 @@ class EnrollmentFormatter
   end
 
   def single_line_format(csv_line)
-    year_percentage = pair_year_percentage(csv_line)
     if @hash_bin.empty?
-      push_to_hash_bin(csv_line, year_percentage)
+      push_to_hash_bin(csv_line)
     else
-      create_new_or_append_hash(csv_line, year_percentage)
+      create_new_or_append_hash(csv_line)
     end
   end
 
-  def create_new_or_append_hash(csv_line, year_percentage)
+  def create_new_or_append_hash(csv_line)
     @hash_bin.each do |hash|
       if hash[:name] == csv_line[:location]
-        pair_name_and_pair_for_repeat_district(hash, year_percentage)
+        pair_name_and_pair_for_repeat_district(hash, csv_line)
       else
-        push_to_hash_bin(csv_line, year_percentage)
+        push_to_hash_bin(csv_line)
       end
     end
   end
 
-  def push_to_hash_bin(csv_line, year_percentage)
-    @hash_bin << pair_name_and_year_percentage(csv_line[:location], year_percentage)
+  def push_to_hash_bin(csv_line)
+    @hash_bin << pair_name_and_year_percentage(csv_line)
   end
 
   def pair_year_percentage(csv_line)
     sub_hash = {csv_line[:TimeFrame] => csv_line[:Data]}
   end
 
-  def pair_name_and_pair_for_repeat_district(hash, year_percentage)
-    hash[:kindergarten_participation].merge!(year_percentage)
+  def pair_name_and_pair_for_repeat_district(hash, csv_line)
+    hash[:kindergarten_participation].merge!(pair_year_percentage(csv_line))
     hash
   end
 
-  def pair_name_and_year_percentage(name, year_percentage)
-    hash = {name: name, kindergarten_participation: year_percentage}
+  def pair_name_and_year_percentage(csv_line)
+    hash = {name: csv_line[:location], kindergarten_participation: pair_year_percentage(csv_line)}
   end
 end
 

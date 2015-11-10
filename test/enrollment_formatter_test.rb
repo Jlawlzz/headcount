@@ -19,14 +19,16 @@ class EnrollmentFormatterTest < Minitest::Test
   def test_pairs_name_and_pair_for_single_line
       ef = EnrollmentFormatter.new("/Users/JordanLawler/turing/1module/projects/head-count/headcount/data/kindergartners dummy .csv")
       hash = {:name => "district", :kindergarten_participation => {2010 => 0.3915}}
-      assert_equal hash, ef.pair_name_and_year_percentage("district", {2010 => 0.3915})
+      csv_line = {:location => "district", :TimeFrame => 2010, :DataFormat => "Percent", :Data => 0.3915}
+      assert_equal hash, ef.pair_name_and_year_percentage(csv_line)
   end
 
   def test_pairs_name_and_pair_for_repeat_district_name
     ef = EnrollmentFormatter.new("/Users/JordanLawler/turing/1module/projects/head-count/headcount/data/kindergartners dummy .csv")
     hash = {:name => "district", :kindergarten_participation => {2009 => 0.1}}
+    csv_line = {:location => "district", :TimeFrame => 2010, :DataFormat => "Percent", :Data => 0.3915}
     hash_mod = {:name => "district", :kindergarten_participation => {2009 => 0.1, 2010 => 0.3915}}
-    assert_equal hash_mod, ef.pair_name_and_pair_for_repeat_district(hash, {2010 => 0.3915})
+    assert_equal hash_mod, ef.pair_name_and_pair_for_repeat_district(hash, csv_line)
   end
 
   def test_single_line_format_for_unique_district_name
