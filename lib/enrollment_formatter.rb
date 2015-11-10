@@ -38,12 +38,12 @@ class EnrollmentFormatter
   end
 
   def pair_name_and_pair_for_repeat_district(hash, csv_line)
-    hash[:kindergarten_participation].merge!(pair_year_percentage(csv_line))
+    hash[:participation].merge!(pair_year_percentage(csv_line))
     hash
   end
 
   def pair_name_and_year_percentage(csv_line)
-    hash = {name: csv_line[:location], kindergarten_participation: pair_year_percentage(csv_line)}
+    hash = {name: csv_line[:location], participation: pair_year_percentage(csv_line)}
   end
 end
 
@@ -57,4 +57,4 @@ end
 # iterate through again
   #if key exists, add(push) value to sub_hash of key
   #if key doesn't exist, create new key and value pair
-#have hash of keys: name, kindergarten_participation(may have multiple values)
+#have hash of keys: name, participation(may have multiple values)
