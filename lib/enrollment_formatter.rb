@@ -9,6 +9,7 @@ class EnrollmentFormatter
   def initialize(handle_path)
     @hash_bin = []
     @handle = CSV.open(handle_path, :headers => true, :header_converters => :symbols)
+    binding.pry
   end
 
   def single_line_format(csv_line)

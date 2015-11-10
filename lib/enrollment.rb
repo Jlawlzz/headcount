@@ -10,9 +10,10 @@ class Enrollment
   end
 
   def kindergarten_participation_by_year
-    string = @participation_years
+    participation_years
   end 
 
   def kindergarten_participation_in_year(year)
+    participation_years[year]
   end
 end

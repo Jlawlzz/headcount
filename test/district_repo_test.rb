@@ -11,6 +11,12 @@ class DistrictRepoTest < Minitest::Test
     assert_equal "ACADEMY 20", dr.district_bin[0].name
   end
 
+  def test_finds_district_return_nil_missing_name
+    dr = DistrictRepository.new
+    dr.to_object([{:name => "ACADEMY 20", :kindergarten_participation => {2010 => 0.3915, 2011 => 0.35356, 2012 => 0.2677}}])
+    assert_equal nil, dr.find_by_name("Turing")
+  end
+
   def test_finds_district_by_name
     dr = DistrictRepository.new
     dr.to_object([{:name => "ACADEMY 20", :kindergarten_participation => {2010 => 0.3915, 2011 => 0.35356, 2012 => 0.2677}}])
