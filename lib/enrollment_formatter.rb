@@ -14,16 +14,24 @@ class EnrollmentFormatter
   def single_line_format(csv_line)
     year_percentage = pair_year_percentage(csv_line)
     if @hash_bin.empty?
-      @hash_bin << pair_name_and_year_percentage(csv_line[:location], year_percentage)
+      push_to_hash_bin(csv_line, year_percentage)
     else
-      @hash_bin.each do |hash|
-        if hash[:name] == csv_line[:location]
-          pair_name_and_pair_for_repeat_district(hash, year_percentage)
-        else
-          @hash_bin << pair_name_and_year_percentage(csv_line[:location], year_percentage)
-        end
+      create_new_or_append_hash(csv_line, year_percentage)
+    end
+  end
+
+  def create_new_or_append_hash(csv_line, year_percentage)
+    @hash_bin.each do |hash|
+      if hash[:name] == csv_line[:location]
+        pair_name_and_pair_for_repeat_district(hash, year_percentage)
+      else
+        push_to_hash_bin(csv_line, year_percentage)
       end
     end
+  end
+
+  def push_to_hash_bin(csv_line, year_percentage)
+    @hash_bin << pair_name_and_year_percentage(csv_line[:location], year_percentage)
   end
 
   def pair_year_percentage(csv_line)
@@ -38,16 +46,7 @@ class EnrollmentFormatter
   def pair_name_and_year_percentage(name, year_percentage)
     hash = {name: name, kindergarten_participation: year_percentage}
   end
-
-
-
-  # def
-  #   @hash_bin << pair_name_and_year_percentage
-  # end
-
-
 end
-
 
 
 #taking in unformatted CSV data
