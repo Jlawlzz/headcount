@@ -12,13 +12,14 @@ class PreFormat
 
   def iterate_through_csv
     @handle.each do |row|
-      @hash_bin << single_line_format(row)
+      single_line_format(row)
     end
   end
 
   def single_line_format(row)
     if @hash_bin.empty?
-      @formatter.pair_name_and_year_percentage(row)
+      # binding.pry
+      @hash_bin << @formatter.pair_name_and_year_percentage(row)
     else
       unique_district?(row)
     end
@@ -36,9 +37,13 @@ class PreFormat
 
    def route_format(row, temp)
      if temp == nil
-       @formatter.pair_name_and_pair_for_repeat_district(row, temp)
+      #  binding.pry
+       @hash_bin << @formatter.pair_name_and_year_percentage(row)
+      #  binding.pry
      else
-       @formatter.pair_name_and_year_percentage(row)
+      #  binding.pry
+       @formatter.pair_name_and_pair_for_repeat_district(row, temp)
+      #  binding.pry
      end
    end
  end
