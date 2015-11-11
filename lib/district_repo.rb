@@ -8,6 +8,8 @@ class DistrictRepository
     @district_bin = []
   end
 
+  def load_file
+
   def to_object(district)
     district.each do |district|
       @district_bin << District.new(district)

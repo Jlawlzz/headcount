@@ -1,51 +1,67 @@
+
 require 'CSV'
 require 'pry'
 
 class EnrollmentFormatter
 
-  attr_reader :handle, :hash_bin
+ attr_reader :handle, :hash_bin
 
+ def initialize(handle_path)
+   @hash_bin = []
+   @handle = CSV.read(handle_path, :headers => true, header_converters: :symbol)
+ end
 
-  def initialize(handle_path)
-    @hash_bin = []
-    @handle = CSV.open(handle_path, :headers => true, :header_converters => :symbols)
+ def iterate_through_csv
+   @handle.each do |row|
+     binding.pry
+     single_line_format(row)
+   end
+ end
+
+ def single_line_format(row)
+   if @hash_bin.empty?
+     push_to_hash_bin(row)
+   else
+     create_new_or_append_hash(row)
+   end
   end
 
-  def single_line_format(csv_line)
-    if @hash_bin.empty?
-      push_to_hash_bin(csv_line)
-    else
-      create_new_or_append_hash(csv_line)
-    end
-  end
-
-  def create_new_or_append_hash(csv_line)
+  def create_new_or_append_hash(row)
+    temp = nil
     @hash_bin.each do |hash|
-      if hash[:name] == csv_line[:location]
-        pair_name_and_pair_for_repeat_district(hash, csv_line)
-      else
-        push_to_hash_bin(csv_line)
+      if hash[:name] == row[:location]
+        temp = hash
       end
     end
+    if temp == nil
+      binding.pry
+      @hash_bin << pair_name_and_year_percentage(row)
+      binding.pry
+    else
+      binding.pry
+      pair_name_and_pair_for_repeat_district(temp, row)
+      binding.pry
+    end
   end
 
-  def push_to_hash_bin(csv_line)
-    @hash_bin << pair_name_and_year_percentage(csv_line)
+  def push_to_hash_bin(row)
+   @hash_bin << pair_name_and_year_percentage(row)
   end
 
-  def pair_year_percentage(csv_line)
-    sub_hash = {csv_line[:TimeFrame] => csv_line[:Data]}
+  def pair_year_percentage(row)
+   sub_hash = {row[:timeframe] => row[:data]}
   end
 
-  def pair_name_and_pair_for_repeat_district(hash, csv_line)
-    hash[:kindergarten_participation].merge!(pair_year_percentage(csv_line))
-    hash
+  def pair_name_and_pair_for_repeat_district(hash, row)
+   binding.pry
+   hash[:participation].merge!(pair_year_percentage(row))
+   binding.pry
   end
 
-  def pair_name_and_year_percentage(csv_line)
-    hash = {name: csv_line[:location], kindergarten_participation: pair_year_percentage(csv_line)}
+  def pair_name_and_year_percentage(row)
+   {name: row[:location], participation: pair_year_percentage(row)}
   end
-end
+ end
 
 
 #taking in unformatted CSV data
