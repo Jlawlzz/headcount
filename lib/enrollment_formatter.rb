@@ -5,8 +5,7 @@ require 'pry'
 class EnrollmentFormatter
 
  def pair_year_percentage(row)
-  #  binding.pry
-  sub_hash = {row[:timeframe] => row[:data]}
+  sub_hash = {row[:timeframe] => row[:data].to_f.round(3)}
  end
 
  def pair_name_and_pair_for_repeat_district(row, hash)

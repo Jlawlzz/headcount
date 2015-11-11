@@ -8,8 +8,9 @@ class EnrollmentRepository
     @enrollment_bin = []
   end
 
-  def to_object(collected_enrollments)
-    collected_enrollments.each do |district_enrollment|
+  def import_data(data)
+    data.each do |district_enrollment|
+      enroll_obj = Enrollment.new(district_enrollment)
       @enrollment_bin << Enrollment.new(district_enrollment)
     end
   end

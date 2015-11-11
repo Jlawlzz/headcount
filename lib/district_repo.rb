@@ -1,5 +1,6 @@
 require_relative 'district'
 require_relative 'pre_format'
+require_relative 'enrollment_repo'
 
 class DistrictRepository
 
@@ -13,11 +14,12 @@ class DistrictRepository
    data = File.open(path[:enrollment][:kindergarten]) 
    pre = PreFormat.new(data)
    pre.iterate_through_csv
-   to_object(pre.hash_bin)
+   EnrollmentRepository.new.import_data(pre.hash_bin)
+   import_data(pre.hash_bin)
  end
 
-  def to_object(load_data)
-    load_data.each do |district|
+  def import_data(data)
+    data.each do |district|
       @district_bin << District.new(district)
     end
   end
