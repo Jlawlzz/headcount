@@ -47,4 +47,11 @@ class DistrictRepoTest < Minitest::Test
     assert_equal [], dr.find_all_matching("NOTASCHOOL")
   end
 
+  def test_loads_data_functional
+   dr = DistrictRepository.new
+   dr.load_data({ 
+     :enrollment => {
+     :kindergarten => "./data/Kindergartners in full-day program.csv"}})
+   assert_equal "ACADEMY 20", dr.find_by_name("Academy 20").name
+  end
 end
