@@ -13,7 +13,6 @@ class EnrollmentFormatter
 
  def iterate_through_csv
    @handle.each do |row|
-     binding.pry
      single_line_format(row)
    end
  end
@@ -34,13 +33,9 @@ class EnrollmentFormatter
       end
     end
     if temp == nil
-      binding.pry
       @hash_bin << pair_name_and_year_percentage(row)
-      binding.pry
     else
-      binding.pry
       pair_name_and_pair_for_repeat_district(temp, row)
-      binding.pry
     end
   end
 
@@ -53,9 +48,7 @@ class EnrollmentFormatter
   end
 
   def pair_name_and_pair_for_repeat_district(hash, row)
-   binding.pry
    hash[:participation].merge!(pair_year_percentage(row))
-   binding.pry
   end
 
   def pair_name_and_year_percentage(row)
