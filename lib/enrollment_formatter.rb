@@ -11,12 +11,20 @@ class EnrollmentFormatter
    @handle = CSV.read(handle_path, :headers => true, header_converters: :symbol)
  end
 
+<<<<<<< HEAD
  def iterate_through_csv
    @handle.each do |row|
      binding.pry
      single_line_format(row)
    end
  end
+=======
+  def initialize(handle_path)
+    @hash_bin = []
+    @handle = CSV.open(handle_path, :headers => true, :header_converters => :symbols)
+    binding.pry
+  end
+>>>>>>> 68798f6e09ff723c8501517f8b41522d6f966a9c
 
  def single_line_format(row)
    if @hash_bin.empty?
@@ -52,6 +60,7 @@ class EnrollmentFormatter
    sub_hash = {row[:timeframe] => row[:data]}
   end
 
+<<<<<<< HEAD
   def pair_name_and_pair_for_repeat_district(hash, row)
    binding.pry
    hash[:participation].merge!(pair_year_percentage(row))
@@ -60,6 +69,15 @@ class EnrollmentFormatter
 
   def pair_name_and_year_percentage(row)
    {name: row[:location], participation: pair_year_percentage(row)}
+=======
+  def pair_name_and_pair_for_repeat_district(hash, csv_line)
+    hash[:participation].merge!(pair_year_percentage(csv_line))
+    hash
+  end
+
+  def pair_name_and_year_percentage(csv_line)
+    hash = {name: csv_line[:location], participation: pair_year_percentage(csv_line)}
+>>>>>>> 68798f6e09ff723c8501517f8b41522d6f966a9c
   end
  end
 
@@ -73,4 +91,4 @@ class EnrollmentFormatter
 # iterate through again
   #if key exists, add(push) value to sub_hash of key
   #if key doesn't exist, create new key and value pair
-#have hash of keys: name, kindergarten_participation(may have multiple values)
+#have hash of keys: name, participation(may have multiple values)
