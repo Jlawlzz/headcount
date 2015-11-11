@@ -21,21 +21,25 @@ class EnrollmentFormatter
    if @hash_bin.empty?
      push_to_hash_bin(row)
    else
-     create_new_or_append_hash(row)
+     unique_district?(row)
    end
   end
 
-  def create_new_or_append_hash(row)
-    temp = nil
+  def unique_district?(row)
+    temp_hash = nil
     @hash_bin.each do |hash|
       if hash[:name] == row[:location]
-        temp = hash
+        temp_hash = hash
       end
     end
-    if temp == nil
+    route_format(row, temp_hash)
+  end
+
+  def route_format(row, temp_hash)
+    if temp_hash == nil
       @hash_bin << pair_name_and_year_percentage(row)
     else
-      pair_name_and_pair_for_repeat_district(temp, row)
+      pair_name_and_pair_for_repeat_district(temp_hash, row)
     end
   end
 
