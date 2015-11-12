@@ -30,4 +30,3 @@ end
   #     dist_obj.enrollment = enroll_obj
   #     binding.pry
   # end
-end
