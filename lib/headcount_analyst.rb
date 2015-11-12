@@ -18,7 +18,13 @@ class HeadcountAnalyst
     comparison.round(3)
   end
 
-  
+  def distryearly_comparisions
+  end
+
+  def kindergarten_participation_rate_variation_trend(district1, district2)
+
+  end 
+
 end 
 
  

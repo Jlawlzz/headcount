@@ -13,7 +13,7 @@ class EnrollmentFormatterTest < Minitest::Test
 
   def test_pairs_name_and_pair_for_single_line
     ef = EnrollmentFormatter.new
-    hash = {:name => "district", :participation => {2010 => 0.392}}
+    hash = {:name => "DISTRICT", :participation => {2010 => 0.392}}
     csv_line = {:location => "district", :timeframe => 2010, :dataformat => "Percent", :data => 0.3915}
     assert_equal hash, ef.pair_name_and_year_percentage(csv_line)
   end

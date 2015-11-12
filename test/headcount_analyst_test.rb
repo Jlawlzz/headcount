@@ -30,7 +30,7 @@ class HeadcountAnalystTest < Minitest::Test
     district2 = District.new({:name => "ACADEMY 20", :participation => {2007 => 1.00, 2008 => 1.00}})
     district2.enrollment = Enrollment.new({:name => "ACADEMY 20", :participation => {2007 => 1.00, 2008 => 1.00, 2011 => 0.800}})
     ha = HeadcountAnalyst.new
-    assert_equal 0.5, ha.kindergarten_participation_rate_variation(district1, district2)
+    assert_equal 0.536, ha.kindergarten_participation_rate_variation(district1, district2)
   end 
 end
 

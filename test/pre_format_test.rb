@@ -14,15 +14,15 @@ class PreFormatTest < Minitest::Test
 
   def test_single_line_format_for_unique_district_name
     ef = PreFormat.new("./data/kindergartners dummy .csv")
-    hash = {:name => "Colorado", :participation => {2007 => 0.395}}
-    ef.single_line_format({:location => "Colorado", :timeframe => 2007, :dataformat => "Percent", :data => 0.39465})
+    hash = {:name => "COLORADO", :participation => {2007 => 0.395}}
+    ef.single_line_format({:location => "COLORADO", :timeframe => 2007, :dataformat => "Percent", :data => 0.39465})
     assert_equal hash, ef.hash_bin[0]
   end
 
   def test_single_line_format_for_duplicate_district_name
     ef = PreFormat.new("./data/kindergartners dummy .csv")
     ef.hash_bin << {:name => "Colorado", :participation => {2009 => 0.1}}
-    hash_mod = {2009=>0.1, 2010=>0.392}
+    hash_mod = [{:name=>"Colorado", :participation=>{2009=>0.1}}, {:name=>"COLORADO", :participation=>{2010=>0.392}}]
     assert_equal hash_mod, ef.single_line_format({:location => "Colorado", :timeframe => 2010, :dataformat => "Percent", :data => 0.3915})
   end
 end
