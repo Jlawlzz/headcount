@@ -22,7 +22,7 @@ class EnrollmentRepository
    end
  end
 
-end 
+end
 
   # def imbed_in_district_instance(enroll_obj)
   #     dist_obj = FindByName.new.find_by_name(enroll_obj)
