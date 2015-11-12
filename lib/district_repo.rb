@@ -1,6 +1,8 @@
 require_relative 'district'
 require_relative 'pre_format'
 require_relative 'enrollment_repo'
+require_relative 'load_format'
+require 'pry'
 
 class DistrictRepository
 
@@ -10,13 +12,16 @@ class DistrictRepository
     @district_bin = []
   end
 
-  def load_data(path)
-    data = File.open(path[:enrollment][:kindergarten])
-    pre = PreFormat.new(data)
-    pre.iterate_through_csv
-    import_data(pre.hash_bin)
+  def load_data(path_set)
+    lf = LoadFormat.new(path_set)
+    lf.pull_apart_category
+    data_for_repo = lf.formatted_load
+
+    import_data(data_for_repo[:kindergarten])
+
     @enroll_repo = EnrollmentRepository.new
-    @enroll_repo.import_data(pre.hash_bin)
+    @enroll_repo.import_data(data_for_repo)
+
     create_data_enroll_link
   end
 

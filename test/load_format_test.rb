@@ -18,7 +18,9 @@ class LoadFormatTest < Minitest::Test
   def test_pull_apart_data_sub_category_data
     lf = LoadFormat.new(load_data)
     lf.pull_apart_category
-    assert_equal nil, lf.formatted_load
+    output = lf.formatted_load
+    assert output[:kindergarten].count > 5
+    assert output[:high_school_graduation].count > 5
   end
 end
 

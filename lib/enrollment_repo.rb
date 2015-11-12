@@ -2,22 +2,21 @@ require_relative 'enrollment'
 
 class EnrollmentRepository
 
-  attr_reader :enrollment_bin
+  attr_reader :enrollments
 
   def initialize
-    @enrollment_bin = []
+    @enrollments = []
   end
 
   def import_data(data)
-
-    data.each do |district_enrollment|
-      enroll_obj = Enrollment.new(district_enrollment)
-      @enrollment_bin << Enrollment.new(district_enrollment)
+    # {:enrollment => {:kindergarten => [...], :hsg => [...]}}
+    data[:kindergarten].each do |row_data|
+      @enrollments << Enrollment.new(row_data)
     end
   end
 
   def find_by_name(name)
-   @enrollment_bin.find do |enrollment|
+   @enrollments.find do |enrollment|
      name.upcase == enrollment.name
    end
  end
