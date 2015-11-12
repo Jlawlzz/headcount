@@ -11,21 +11,21 @@ class DistrictRepository
   end
 
   def load_data(path)
-   data = File.open(path[:enrollment][:kindergarten])
-   pre = PreFormat.new(data)
-   pre.iterate_through_csv
-   import_data(pre.hash_bin)
-   @enroll_repo = EnrollmentRepository.new
-   @enroll_repo.import_data(pre.hash_bin)
-   create_data_enroll_link
- end
+    data = File.open(path[:enrollment][:kindergarten])
+    pre = PreFormat.new(data)
+    pre.iterate_through_csv
+    import_data(pre.hash_bin)
+    @enroll_repo = EnrollmentRepository.new
+    @enroll_repo.import_data(pre.hash_bin)
+    create_data_enroll_link
+  end
 
- def create_data_enroll_link
-   @district_bin.each do |district|
-     temp = @enroll_repo.find_by_name(district.name)
-     district.enrollment = temp
-   end
- end
+  def create_data_enroll_link
+    @district_bin.each do |district|
+      temp = @enroll_repo.find_by_name(district.name)
+      district.enrollment = temp
+    end
+  end
 
   def import_data(data)
     data.each do |district|

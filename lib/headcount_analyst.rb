@@ -18,6 +18,12 @@ class HeadcountAnalyst
     comparison.round(3)
   end
 
+  #take in district one particiaption_years
+  #take in district two particiaption_years
+  #iterate through, comparing district one values against district two values for each year
+  #link result back to year
+  #print all year and 
+
   def distryearly_comparisions
   end
 
@@ -27,12 +33,3 @@ class HeadcountAnalyst
 
 end 
 
- 
-#need seperate methods for 1 and 3 based on return
-#break up average logic into different methods
-#how does district compare to state average?
-#how does district compare to other district average?
-#return individual years
-
-# => {2010=>0.392}
-# sub_hash[2010] => 0.392
