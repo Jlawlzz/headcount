@@ -10,13 +10,11 @@ class EnrollmentRepository
   end
 
   def import_data(data)
-    binding.pry
     data.each do |district_enrollment|
       enroll_obj = Enrollment.new(district_enrollment)
       imbed_in_district_instance(enroll_obj)
       @enrollment_bin << Enrollment.new(district_enrollment)
     end
-    binding.pry
   end 
 
   def imbed_in_district_instance(enroll_obj)
