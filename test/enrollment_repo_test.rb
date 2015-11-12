@@ -34,5 +34,12 @@ class EnrollmentRepositoryTest < Minitest::Test
     er.import_data([{:name => "ACADEMY 20", :participation => {2010 => 0.3915, 2011 => 0.35356, 2012 => 0.2677}}])
     assert_equal nil, er.find_by_name("Turing")
   end
-
+  #
+  # def test_reaches_to_district_repo_for_link
+  #   dr = DistrictRepository.new
+  #   dr.load_data({
+  #     :enrollment => {
+  #     :kindergarten => "./data/Kindergartners in full-day program.csv"}})
+  #   assert true
+  # end
 end

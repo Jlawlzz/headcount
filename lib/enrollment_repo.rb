@@ -1,5 +1,4 @@
 require_relative 'enrollment'
-require_relative 'district_repo'
 
 class EnrollmentRepository
 
@@ -10,19 +9,24 @@ class EnrollmentRepository
   end
 
   def import_data(data)
-    binding.pry
+    # binding.pry
     data.each do |district_enrollment|
       enroll_obj = Enrollment.new(district_enrollment)
-      imbed_in_district_instance(enroll_obj)
+      # imbed_in_district_instance(enroll_obj)
       @enrollment_bin << Enrollment.new(district_enrollment)
     end
-    binding.pry
-  end 
-
-  def imbed_in_district_instance(enroll_obj)
-      dist_obj = find_by_name(enroll_obj.name)
-      dist_obj.enrollment = enroll_obj
   end
-end 
 
- 
+  def find_by_name(name)
+    @enrollment_bin.find do |enrollment|
+      name.upcase == enrollment.name
+    end
+  end
+
+  # def imbed_in_district_instance(enroll_obj)
+  #     dist_obj = FindByName.new.find_by_name(enroll_obj)
+  #     binding.pry
+  #     dist_obj.enrollment = enroll_obj
+  #     binding.pry
+  # end
+end

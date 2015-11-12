@@ -13,6 +13,6 @@ class EnrollmentFormatter
  end
 
  def pair_name_and_year_percentage(row)
-   hash = {name: row[:location], participation: pair_year_percentage(row)}
+   hash = {name: row[:location].upcase, participation: pair_year_percentage(row)}
  end
 end

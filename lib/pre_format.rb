@@ -28,7 +28,7 @@ class PreFormat
    def unique_district?(row)
      temp = nil
      @hash_bin.each do |hash|
-       if hash[:name] == row[:location]
+       if hash[:name] == row[:location].upcase
          temp = hash
        end
      end
