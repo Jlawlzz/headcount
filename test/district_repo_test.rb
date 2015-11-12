@@ -55,5 +55,11 @@ class DistrictRepoTest < Minitest::Test
    assert_equal "ACADEMY 20", dr.find_by_name("Academy 20").name
   end
 
-  
+   def test_find_district_by_name_returns_district_object
+   dr = DistrictRepository.new
+   dr.load_data({ 
+     :enrollment => {
+     :kindergarten => "./data/Kindergartners in full-day program.csv"}})
+   assert_equal District, dr.find_by_name("Academy 20").class
+  end
 end

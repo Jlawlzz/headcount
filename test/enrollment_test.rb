@@ -45,4 +45,5 @@ class EnrollmentTest < Minitest::Test
     assert_equal nil, e.kindergarten_participation_in_year("2009")
   end
 
+
 end 
