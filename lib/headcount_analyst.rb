@@ -20,7 +20,6 @@ class HeadcountAnalyst
 
   def district2_average(district1, district2)
     district2 = pull_district_objects(district2)
-    district2 = @district_repo.enroll_repo.find_by_name(district2)
     district2_avg = district2.participation_years.values.inject(:+) / district2.participation_years.count
   end 
 
