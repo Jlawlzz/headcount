@@ -4,7 +4,7 @@ require_relative 'enrollment_repo'
 
 class DistrictRepository
 
-  attr_reader :district_bin
+  attr_reader :district_bin, :enroll_repo
 
   def initialize
     @district_bin = []
@@ -18,14 +18,14 @@ class DistrictRepository
     @enroll_repo = EnrollmentRepository.new
     @enroll_repo.import_data(pre.hash_bin)
     create_data_enroll_link
-  end
+ end
 
-  def create_data_enroll_link
+ def create_data_enroll_link
     @district_bin.each do |district|
       temp = @enroll_repo.find_by_name(district.name)
       district.enrollment = temp
     end
-  end
+ end
 
   def import_data(data)
     data.each do |district|

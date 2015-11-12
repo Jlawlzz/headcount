@@ -44,6 +44,4 @@ class EnrollmentTest < Minitest::Test
     hash = {2009 => 0.100, 2010 => 0.391}
     assert_equal nil, e.kindergarten_participation_in_year("2009")
   end
-
-
 end 
